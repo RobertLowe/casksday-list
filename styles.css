@@ -1,3 +1,7 @@
 #login-dropdown-list {
   left: -138px !important;
 }
+
+#login-display-name {
+  color: white;
+}
