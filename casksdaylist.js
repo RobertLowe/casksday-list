@@ -18,7 +18,7 @@ if (Meteor.isClient) {
 
     Session.get('loaded-user');
 
-    if(user && user.drinks && user.drinks.indexOf(this._id) == 0) {
+    if(user && user.drinks && user.drinks.indexOf(this._id) >= 0) {
       return "checked=checked";
     } else {
       return "";
