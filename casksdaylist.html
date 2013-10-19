@@ -1,0 +1,99 @@
+<head>
+  <title>casksdaylist</title>
+</head>
+
+<body>
+  {{> navbar}}
+  {{> brews}}
+</body>
+
+<template name="navbar">
+  <div class="navbar navbar-inverse" style="position: static;">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+
+        <a class="brand" href="#">Casksday List</a>
+
+        <form class="navbar-search pull-left" action="">
+          <input id="term" type="text" class="search-query span2" placeholder="Search">
+        </form>
+
+        <div class="pull-right" href="#" style="margin-top: 7px">
+          {{loginButtons}}
+        </a>
+
+      </div>
+    </div><!-- /navbar-inner -->
+  </div>
+</template>
+
+<template name="brews">
+  
+  <table class="table table-condensed table-hover table-striped">
+    <thead>
+      <tr>
+
+        {{#if loggedIn}}
+          <th>
+            Drink?
+          </th>
+          <th>
+            Drunk?
+          </th>
+        {{/if}}
+
+        <th>
+          # 
+          <a href='#' class='sorter' data-direction='1', data-property='number'>&darr;</a>
+          <a href='#' class='sorter' data-direction='-1', data-property='number'>&uarr;</a>
+        </th>
+        <th> 
+          Brewery/Name/Style
+          <a href='#' class='sorter' data-direction='1', data-property='name'>&darr;</a>
+          <a href='#' class='sorter' data-direction='-1', data-property='name'>&uarr;</a>
+        </th>
+        <th> 
+          Session 
+          <a href='#' class='sorter' data-direction='1', data-property='session'>&darr;</a>
+          <a href='#' class='sorter' data-direction='-1', data-property='session'>&uarr;</a>
+        </th>
+        <th> 
+          Section 
+          <a href='#' class='sorter' data-direction='1', data-property='section'>&darr;</a>
+          <a href='#' class='sorter' data-direction='-1', data-property='section'>&uarr;</a>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each brews}}
+        <tr>
+
+          {{#if loggedIn}}
+            <th>
+              <input type='checkbox' class='drink' data-brew='{{_id}}' {{drinkChecked}}>
+            </th>
+            <th>
+              <input type='checkbox' class='drunk' data-brew='{{_id}}' {{drunkChecked}}>
+            </th>
+          {{/if}}
+
+          <td>{{number}}</td>
+          <td>{{name}}</td>
+          <td>{{session}}</td>
+          <td>{{section}}</td>
+        </tr>
+      {{else}}
+        <tr>
+          <td colspan=4>Sorry, no brews match your search.</td>
+        </tr>
+      {{/each}}
+    </tbody>
+
+  </table>
+</template>
