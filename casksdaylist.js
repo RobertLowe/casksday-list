@@ -138,8 +138,8 @@ if (Meteor.isServer) {
 
 
   Brews.allow({
-    insert: function(){ return false; }
-    update: function(){ return false; }
+    insert: function(){ return false; },
+    update: function(){ return false; },
     remove: function(){ return false; }
   })
 
