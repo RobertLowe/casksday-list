@@ -5,6 +5,6 @@
 
 standard-app-packages
 preserve-inputs
-bootstrap
 accounts-ui
-accounts-google
+accounts-password
+bootstrap

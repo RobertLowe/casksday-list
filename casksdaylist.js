@@ -10,9 +10,6 @@ if (Meteor.isClient) {
     Session.set('loaded-user', true);
   });
 
-  Template.brews.rendered = function(){
-  }
-
   Template.brews.drinkChecked = function(){
     user = Meteor.user()
 
@@ -43,8 +40,8 @@ if (Meteor.isClient) {
   Template.brews.brews = function(){
 
     term = Session.get('term');
-
-    console.log(term);
+    direction = Session.get('direction');
+    property = Session.get('property');
 
     if( (term == "" || typeof(term) == "undefined") ){
       search = {}
@@ -58,9 +55,6 @@ if (Meteor.isClient) {
         ]
       }
     }
-
-    direction = Session.get('direction');
-    property = Session.get('property');
 
     sort = {sort: {}}
     sort['sort'][property] = direction
@@ -117,8 +111,10 @@ if (Meteor.isServer) {
   })
 
   Meteor.publish("userData", function () {
-    return Meteor.users.find({_id: this.userId},
-                             {fields: {'drinks': 1, 'drunks': 1}});
+    return Meteor.users.find(
+      {_id: this.userId},
+      {fields: {'drinks': 1, 'drunks': 1}}
+    );
   });
 
   Meteor.methods({
@@ -135,7 +131,6 @@ if (Meteor.isServer) {
       Meteor.users.update(this.userId, { $pull: { drunks: brew }})
     }
   })
-
 
   Brews.allow({
     insert: function(){ return false; },
